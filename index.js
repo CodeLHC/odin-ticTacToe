@@ -3,7 +3,7 @@ const gameBoard = (() => {
   const showWinner = document.getElementById("winner");
   const restartGame = document.getElementById("restartGame");
 
-  const board = new Array(9);
+  const board = Array.from({ length: 9 }, () => "");
   const populateTable = () => {
     for (let i = 0; i < board.length; i++) {
       document.getElementById(i).innerText = "";
@@ -11,10 +11,12 @@ const gameBoard = (() => {
   };
 
   restartGame.addEventListener("click", () => {
+    console.log(board);
     dialog.close();
-    board.forEach((element) => {
-      element = "";
+    board.forEach((_element, index, array) => {
+      array[index] = "";
     });
+    console.log(board);
     populateTable();
   });
 
@@ -46,6 +48,15 @@ const gameBoard = (() => {
         showWinner.innerText = "Player One won!";
       } else return;
     });
+
+    if (
+      board.every((element) => {
+        return element != "";
+      })
+    ) {
+      dialog.showModal();
+      showWinner.innerText = "Its a draw!";
+    } else return;
   };
   return { board, populateTable, gameOutcome };
 })();
@@ -74,11 +85,13 @@ const player = (name, mark) => {
   return { getName, getMarker, placeMarker };
 };
 
-const runGame = (() => {
+const runGame = () => {
   gameBoard.populateTable();
 
   const playerOne = player(1, "O");
   const playerTwo = player(2, "X");
   playerOne.placeMarker();
   playerTwo.placeMarker();
-})();
+};
+
+runGame();
