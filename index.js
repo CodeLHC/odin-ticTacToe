@@ -1,22 +1,22 @@
 const gameBoard = (() => {
-  const board = new Array(9);
-  const m = [
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
-  ];
+  const dialog = document.getElementById("dialog");
+  const showWinner = document.getElementById("winner");
+  const restartGame = document.getElementById("restartGame");
 
-  //   const testBoard = ["O", "X", "X", "O", "X", "O", "X", "X", "O"];
+  const board = new Array(9);
   const populateTable = () => {
     for (let i = 0; i < board.length; i++) {
-      //   console.log(board[i]);
-      //   if (board[i] === undefined) {
-      //     document.getElementById(i).innerText = " ";
-      //   }
-      //   document.getElementById(i).innerText = board[i];
       document.getElementById(i).innerText = "";
     }
   };
+
+  restartGame.addEventListener("click", () => {
+    dialog.close();
+    board.forEach((element) => {
+      element = "";
+    });
+    populateTable();
+  });
 
   const gameOutcome = () => {
     const winningCombinations = [
@@ -35,13 +35,15 @@ const gameBoard = (() => {
           return board[number] === "X";
         })
       ) {
-        console.log("player 2 wins");
+        dialog.showModal();
+        showWinner.innerText = "Player Two won!";
       } else if (
         element.every((number) => {
           return board[number] === "O";
         })
       ) {
-        console.log("player 1 wins");
+        dialog.showModal();
+        showWinner.innerText = "Player One won!";
       } else return;
     });
   };
@@ -72,14 +74,11 @@ const player = (name, mark) => {
   return { getName, getMarker, placeMarker };
 };
 
-const playerOne = player(1, "O");
-const playerTwo = player(2, "X");
-
-const runGame = () => {
+const runGame = (() => {
   gameBoard.populateTable();
 
+  const playerOne = player(1, "O");
+  const playerTwo = player(2, "X");
   playerOne.placeMarker();
   playerTwo.placeMarker();
-};
-
-runGame();
+})();
