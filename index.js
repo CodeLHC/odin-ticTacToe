@@ -11,14 +11,24 @@ const gameBoard = (() => {
   };
 
   restartGame.addEventListener("click", () => {
-    console.log(board);
     dialog.close();
     board.forEach((_element, index, array) => {
       array[index] = "";
     });
-    console.log(board);
+
     populateTable();
   });
+
+  function checkCombo(combo, playerMark) {
+    return combo.every((number) => {
+      return board[number] === playerMark;
+    });
+  }
+
+  function showResult(message) {
+    dialog.showModal();
+    showWinner.innerText = message;
+  }
 
   const gameOutcome = () => {
     const winningCombinations = [
@@ -31,31 +41,22 @@ const gameBoard = (() => {
       [0, 4, 8],
       [2, 4, 6],
     ];
-    winningCombinations.forEach((element) => {
-      if (
-        element.every((number) => {
-          return board[number] === "X";
-        })
-      ) {
-        dialog.showModal();
-        showWinner.innerText = "Player Two won!";
-      } else if (
-        element.every((number) => {
-          return board[number] === "O";
-        })
-      ) {
-        dialog.showModal();
-        showWinner.innerText = "Player One won!";
+    winningCombinations.forEach((combo) => {
+      if (checkCombo(combo, "X")) {
+        showResult("Player Two won!");
+      } else if (checkCombo(combo, "O")) {
+        showResult("Player One won!");
       } else return;
     });
 
-    if (
-      board.every((element) => {
+    function isDraw() {
+      return board.every((element) => {
         return element != "";
-      })
-    ) {
-      dialog.showModal();
-      showWinner.innerText = "Its a draw!";
+      });
+    }
+
+    if (isDraw()) {
+      showResult("It's a draw!");
     } else return;
   };
   return { board, populateTable, gameOutcome };
