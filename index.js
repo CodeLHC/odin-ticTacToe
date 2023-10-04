@@ -105,8 +105,8 @@ const player = (name, mark) => {
 };
 
 const runGame = () => {
-  const playerOne = player(prompt("Who uses Naughts (O)?"), "O");
-  const playerTwo = player(prompt("Who uses Crosses (X)?"), "X");
+  const playerOne = player(prompt("Who uses Naughts (O)?", "Player One"), "O");
+  const playerTwo = player(prompt("Who uses Crosses (X)?", "Player Two"), "X");
   gameBoard([playerOne, playerTwo]).populateTable();
 };
 

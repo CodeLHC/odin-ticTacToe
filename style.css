@@ -1,4 +1,48 @@
-td {
-  border-bottom: 1px solid #ddd;
-  padding: 100px;
+/* h1 {
+  box-shadow: 0.5rem 0.5rem black, -0.5rem -0.5rem #ccc;
+} */
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#display {
+  background-color: black;
+  width: 630px;
+  height: 646px;
+  box-shadow: 1px 1px 0px #999, 2px 2px 0px #999, 3px 3px 0px #999,
+    4px 4px 0px #999, 5px 5px 0px #999, 6px 6px 0px #999, 7px 7px 0px #999,
+    8px 8px 0px #999;
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  border: 2px solid black;
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  text-align: center;
+}
+
+td:hover {
+  background-color: lightgray;
+}
+
+#players {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  gap: 50px;
+}
+
+#p1,
+#p2 {
+  border: 3px solid black;
+  text-align: center;
+  box-shadow: 1px 1px 0px #999, 2px 2px 0px #999, 3px 3px 0px #999,
+    4px 4px 0px #999, 5px 5px 0px #999, 6px 6px 0px #999, 7px 7px 0px #999;
+  padding: 20px;
 }
