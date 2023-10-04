@@ -15,7 +15,7 @@ const gameBoard = (players) => {
     p2.innerText = `${nameTwo}
       ${markerTwo}`;
   }
-  p1.style.fontWeight = "bold";
+  p2.style.color = "gray";
 
   const populateTable = () => {
     for (let i = 0; i < board.length; i++) {
@@ -38,12 +38,12 @@ const gameBoard = (players) => {
         gameOutcome(activePlayer.getName(), activePlayer.getMarker());
         if (activePlayer === players[0]) {
           activePlayer = players[1];
-          p2.style.fontWeight = "bold";
-          p1.style.fontWeight = "normal";
+          p2.style.color = "black";
+          p1.style.color = "gray";
         } else if (activePlayer === players[1]) {
           activePlayer = players[0];
-          p1.style.fontWeight = "bold";
-          p2.style.fontWeight = "normal";
+          p1.style.color = "black";
+          p2.style.color = "gray";
         }
       });
     });

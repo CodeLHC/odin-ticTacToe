@@ -28,6 +28,7 @@ body {
   background-color: white;
   text-align: center;
   font-family: "Gabarito", cursive;
+  font-size: 40px;
 }
 
 td:hover {
@@ -49,4 +50,5 @@ td:hover {
     4px 4px 0px #999, 5px 5px 0px #999, 6px 6px 0px #999, 7px 7px 0px #999;
   padding: 20px;
   font-family: "Gabarito", cursive;
+  font-size: 20px;
 }
