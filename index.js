@@ -11,10 +11,11 @@ const gameBoard = (players) => {
 
   function displayPlayerInfo(nameOne, markerOne, nameTwo, markerTwo) {
     p1.innerText = `${nameOne}
-    ${markerOne}`;
+      ${markerOne}`;
     p2.innerText = `${nameTwo}
-    ${markerTwo}`;
+      ${markerTwo}`;
   }
+  p1.style.fontWeight = "bold";
 
   const populateTable = () => {
     for (let i = 0; i < board.length; i++) {
@@ -26,7 +27,6 @@ const gameBoard = (players) => {
       players[1].getName(),
       players[1].getMarker()
     );
-    p1.style.fontWeight = "bold";
 
     document.querySelectorAll(".box").forEach((box) => {
       box.addEventListener("click", (e) => {
