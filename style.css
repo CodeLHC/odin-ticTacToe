@@ -1,6 +1,8 @@
-/* h1 {
-  box-shadow: 0.5rem 0.5rem black, -0.5rem -0.5rem #ccc;
-} */
+@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@800&family=Mooli&display=swap");
+
+h1 {
+  font-family: "Gabarito", cursive;
+}
 
 body {
   display: flex;
@@ -25,6 +27,7 @@ body {
   height: 200px;
   background-color: white;
   text-align: center;
+  font-family: "Gabarito", cursive;
 }
 
 td:hover {
@@ -45,4 +48,5 @@ td:hover {
   box-shadow: 1px 1px 0px #999, 2px 2px 0px #999, 3px 3px 0px #999,
     4px 4px 0px #999, 5px 5px 0px #999, 6px 6px 0px #999, 7px 7px 0px #999;
   padding: 20px;
+  font-family: "Gabarito", cursive;
 }
