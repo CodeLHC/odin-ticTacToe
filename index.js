@@ -1,13 +1,31 @@
-const gameBoard = (() => {
+const gameBoard = (players) => {
   const dialog = document.getElementById("dialog");
   const showWinner = document.getElementById("winner");
   const restartGame = document.getElementById("restartGame");
 
+  let activePlayer = players[0];
+
   const board = Array.from({ length: 9 }, () => "");
+
   const populateTable = () => {
     for (let i = 0; i < board.length; i++) {
       document.getElementById(i).innerText = "";
     }
+    document.querySelectorAll(".box").forEach((box) => {
+      box.addEventListener("click", (e) => {
+        if (box.innerText) return;
+        box.innerText = activePlayer.getMarker();
+        const index = e.target.id;
+        board[index] = activePlayer.getMarker();
+
+        gameOutcome(activePlayer.getName(), activePlayer.getMarker());
+        if (activePlayer === players[0]) {
+          activePlayer = players[1];
+        } else if (activePlayer === players[1]) {
+          activePlayer = players[0];
+        }
+      });
+    });
   };
 
   restartGame.addEventListener("click", () => {
@@ -30,7 +48,7 @@ const gameBoard = (() => {
     showWinner.innerText = message;
   }
 
-  const gameOutcome = () => {
+  const gameOutcome = (name, marker) => {
     const winningCombinations = [
       [0, 1, 2],
       [3, 4, 5],
@@ -42,10 +60,10 @@ const gameBoard = (() => {
       [2, 4, 6],
     ];
     winningCombinations.forEach((combo) => {
-      if (checkCombo(combo, "X")) {
-        showResult("Player Two won!");
+      if (checkCombo(combo, marker)) {
+        showResult(`${name} won!`);
       } else if (checkCombo(combo, "O")) {
-        showResult("Player One won!");
+        showResult("Player One won!ZZZZZ");
       } else return;
     });
 
@@ -60,39 +78,27 @@ const gameBoard = (() => {
     } else return;
   };
   return { board, populateTable, gameOutcome };
-})();
+};
 
 const player = (name, mark) => {
   const getName = () => name;
   const getMarker = () => mark;
-  const placeMarker = () => {
-    document.querySelectorAll(".box").forEach((box) => {
-      box.addEventListener("click", (e) => {
-        if (box.innerText) return;
-        if (mark === "X") {
-          mark = "O";
-        } else if (mark === "O") {
-          mark = "X";
-        }
-        box.innerText = mark;
-        const index = e.target.id;
-        gameBoard.board[index] = mark;
-
-        gameBoard.gameOutcome();
-      });
-    });
-  };
-
-  return { getName, getMarker, placeMarker };
+  return { getName, getMarker };
 };
 
-const runGame = () => {
-  gameBoard.populateTable();
+// function askPlayerName(promptMessage) {
+//   //   const p1 = document.getElementById("p1");
+//   //   const p2 = document.getElementById("p2");
+//   return prompt("Who uses Naughts (O)?");
+//   //   p1.innerText = placeholderName;
+//   //   placeholderName = prompt("Who uses Crosses (X)?");
+//   //   p2.innerText = placeholderName;
+// }
 
-  const playerOne = player(1, "O");
-  const playerTwo = player(2, "X");
-  playerOne.placeMarker();
-  playerTwo.placeMarker();
+const runGame = () => {
+  const playerOne = player(prompt("Who uses Naughts (O)?"), "O");
+  const playerTwo = player(prompt("Who uses Crosses (X)?"), "X");
+  gameBoard([playerOne, playerTwo]).populateTable();
 };
 
 runGame();
