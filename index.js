@@ -2,15 +2,32 @@ const gameBoard = (players) => {
   const dialog = document.getElementById("dialog");
   const showWinner = document.getElementById("winner");
   const restartGame = document.getElementById("restartGame");
+  const p1 = document.getElementById("p1");
+  const p2 = document.getElementById("p2");
 
   let activePlayer = players[0];
 
   const board = Array.from({ length: 9 }, () => "");
 
+  function displayPlayerInfo(nameOne, markerOne, nameTwo, markerTwo) {
+    p1.innerText = `${nameOne}
+    ${markerOne}`;
+    p2.innerText = `${nameTwo}
+    ${markerTwo}`;
+  }
+
   const populateTable = () => {
     for (let i = 0; i < board.length; i++) {
       document.getElementById(i).innerText = "";
     }
+    displayPlayerInfo(
+      players[0].getName(),
+      players[0].getMarker(),
+      players[1].getName(),
+      players[1].getMarker()
+    );
+    p1.style.fontWeight = "bold";
+
     document.querySelectorAll(".box").forEach((box) => {
       box.addEventListener("click", (e) => {
         if (box.innerText) return;
@@ -21,8 +38,12 @@ const gameBoard = (players) => {
         gameOutcome(activePlayer.getName(), activePlayer.getMarker());
         if (activePlayer === players[0]) {
           activePlayer = players[1];
+          p2.style.fontWeight = "bold";
+          p1.style.fontWeight = "normal";
         } else if (activePlayer === players[1]) {
           activePlayer = players[0];
+          p1.style.fontWeight = "bold";
+          p2.style.fontWeight = "normal";
         }
       });
     });
@@ -33,7 +54,6 @@ const gameBoard = (players) => {
     board.forEach((_element, index, array) => {
       array[index] = "";
     });
-
     populateTable();
   });
 
@@ -62,8 +82,6 @@ const gameBoard = (players) => {
     winningCombinations.forEach((combo) => {
       if (checkCombo(combo, marker)) {
         showResult(`${name} won!`);
-      } else if (checkCombo(combo, "O")) {
-        showResult("Player One won!ZZZZZ");
       } else return;
     });
 
@@ -85,15 +103,6 @@ const player = (name, mark) => {
   const getMarker = () => mark;
   return { getName, getMarker };
 };
-
-// function askPlayerName(promptMessage) {
-//   //   const p1 = document.getElementById("p1");
-//   //   const p2 = document.getElementById("p2");
-//   return prompt("Who uses Naughts (O)?");
-//   //   p1.innerText = placeholderName;
-//   //   placeholderName = prompt("Who uses Crosses (X)?");
-//   //   p2.innerText = placeholderName;
-// }
 
 const runGame = () => {
   const playerOne = player(prompt("Who uses Naughts (O)?"), "O");
