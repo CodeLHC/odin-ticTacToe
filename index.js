@@ -4,6 +4,7 @@ const gameBoard = (players) => {
   const restartGame = document.getElementById("restartGame");
   const p1 = document.getElementById("p1");
   const p2 = document.getElementById("p2");
+  p2.style.color = "gray";
 
   let activePlayer = players[0];
 
@@ -15,7 +16,6 @@ const gameBoard = (players) => {
     p2.innerText = `${nameTwo}
       ${markerTwo}`;
   }
-  p2.style.color = "gray";
 
   const populateTable = () => {
     for (let i = 0; i < board.length; i++) {
@@ -105,9 +105,47 @@ const player = (name, mark) => {
 };
 
 const runGame = () => {
-  const playerOne = player(prompt("Who uses Naughts (O)?", "Player One"), "O");
-  const playerTwo = player(prompt("Who uses Crosses (X)?", "Player Two"), "X");
+  //   const playerTwoOrCPU = () => {
+  //     const twoOrCPU = document.getElementById("twoOrCPU");
+  // const twoPlayers = document.getElementById("two");
+  //     const CPU = document.getElementById("CPU");
+  //     const boardDisplay = document.getElementById("display");
+  //     const showPlayers = document.getElementById("players");
+
+  //     boardDisplay.style.display = "none";
+  //     showPlayers.style.display = "none";
+  // const test = {};
+  // twoPlayers.addEventListener("click", () => {
+  //       twoOrCPU.style.display = "none";
+  playerOne = player(prompt("Who uses Naughts (O)?", "Player One"), "O");
+  playerTwo = player(prompt("Who uses Crosses (X)?", "Player Two"), "X");
+  //       boardDisplay.style.display = "flex";
+  //       showPlayers.style.display = "flex";
+  //       console.log(playerOne, playerTwo);
+  //       return { playerOne, playerTwo };
+  // });
+  // console.log(test);
+  //   return test;
+
+  //     CPU.addEventListener("click", () => {
+  //       const playerOne = player(
+  //         prompt("Who uses Naughts (O)?", "Player One"),
+  //         "O"
+  //       );
+  //       const playerTwo = player("Computer", "X");
+  //       twoOrCPU.style.display = "none";
+  //       boardDisplay.style.display = "flex";
+  //       showPlayers.style.display = "flex";
+
+  //       return { playerOne, playerTwo };
+  //     });
+  //     return { playerOne, playerTwo };
+  //   };
+  //   playerTwoOrCPU();
+  //   console.log(playerTwoOrCPU.playerOne, playerTwoOrCPU.playerTwo);
+  // if (test.playerOne !== undefined || test.playerTwo !== undefined) {
   gameBoard([playerOne, playerTwo]).populateTable();
+  // }
 };
 
 runGame();
